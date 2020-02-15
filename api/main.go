@@ -71,7 +71,7 @@ func main() {
 
 	cmd_service.Init()
 	rateLimitedClient := utils.NewRateLimitedClient(cmd_service.Client())
-	//securedClient := utils.NewCircuitBreakerClient(rateLimitedClient, config)
+	
 	// TODO return it back
 	securedClient := rateLimitedClient
 
@@ -111,15 +111,6 @@ func main() {
 	// Timestamp API
 	timestamp_service := api.TimestampService{}
 	timestamp_service.Register()
-
-	// Organization API
-	// organization_service := api.OrganizationService{
-	// 	OrganisationClient: organisation_proto.NewOrganisationClient("healum.srv.organization", securedClient),
-	// 	UserClient:         user.NewAccountClient("go.micro.srv.user", securedClient),
-	// 	FilterMiddle:       auth_filter,
-	// 	ServerMetrics:      m,
-	// }
-	// organization_service.Register()
 
 	// Plan API
 	plan_service := api.PlanService{
