@@ -429,18 +429,13 @@ func (p *TrackService) GetGoalHistory(req *restful.Request, rsp *restful.Respons
 func (p *TrackService) CreateTrackChallenge(req *restful.Request, rsp *restful.Response) {
 	log.Info("Received Track.CreateTrackChallenge API request")
 	req_track := new(track_proto.CreateTrackChallengeRequest)
-	// err := req.ReadEntity(req_track)
-	// if err != nil {
-	// 	utils.WriteErrorResponse(rsp, err, "go.micro.srv.track.CreateTrackChallenge", "BindError")
-	// 	return
-	// }
+
 	if err := utils.UnmarshalAny(req, rsp, req_track); err != nil {
 		utils.WriteErrorResponse(rsp, err, "go.micro.srv.track.CreateTrackChallenge", "BindError")
 		return
 	}
 	req_track.ChallengeId = req.PathParameter("challenge_id")
 	req_track.OrgId = req.Attribute(OrgIdAttrName).(string)
-	// req_track.TeamId = req.Attribute(TeamIdAttrName).(string)
 
 	ctx := common.NewContextByHeader(context.TODO(), req.Request.Header)
 	resp, err := p.TrackClient.CreateTrackChallenge(ctx, req_track)

@@ -3478,11 +3478,7 @@ func (p *StaticService) AllNotifications(req *restful.Request, rsp *restful.Resp
 func (p *StaticService) CreateNotification(req *restful.Request, rsp *restful.Response) {
 	log.Info("Received Static.CreateNotification API request")
 	req_notification := new(static_proto.CreateNotificationRequest)
-	// err := req.ReadEntity(req_notification)
-	// if err != nil {
-	// 	utils.WriteErrorResponse(rsp, err, "go.micro.srv.static.CreateNotification", "BindError")
-	// 	return
-	// }
+
 	if err := utils.UnmarshalAny(req, rsp, req_notification); err != nil {
 		utils.WriteErrorResponse(rsp, err, "go.micro.srv.static.CreateNotification", "BindError")
 		return

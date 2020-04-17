@@ -66,13 +66,6 @@ func (u UserService) Register() {
 		// Filter(u.Audit.Clone(audit).AuditFilter).
 		Doc("Read a user"))
 
-	// ws.Route(ws.POST("/filter").To(u.FilterUser).
-	// 	Filter(u.Auth.BasicAuthenticate).
-	// 	Filter(u.Auth.OrganisationAuthenticate).
-	// 	Filter(u.Auth.EmployeeAuthenticate).
-	// 	Filter(u.Auth.Paginate).
-	// 	Doc("Filter user"))
-
 	ws.Route(ws.POST("/user/content/share").To(u.ShareContent).
 		Filter(u.Auth.BasicAuthenticate).
 		Filter(u.Auth.OrganisationAuthenticate).
@@ -540,11 +533,7 @@ func (p *UserService) ShareContent(req *restful.Request, rsp *restful.Response) 
 	req_content.UserId = req.Attribute(UserIdAttrName).(string)
 	req_content.OrgId = req.Attribute(OrgIdAttrName).(string)
 	req_content.TeamId = req.Attribute(TeamIdAttrName).(string)
-	// err := req.ReadEntity(req_content)
-	// if err != nil {
-	// 	utils.WriteErrorResponse(rsp, err, "go.micro.srv.user.ShareContent", "BindError")
-	// 	return
-	// }
+
 	if err := utils.UnmarshalAny(req, rsp, req_content); err != nil {
 		utils.WriteErrorResponse(rsp, err, "go.micro.srv.user.ShareContent", "BindError")
 		return

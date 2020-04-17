@@ -49,8 +49,7 @@ var preference = &user_proto.Preferences{
 var user_plan *userapp_proto.UserPlan
 
 func initUserAppDb() {
-	// ctx := common.NewTestContext(context.TODO())
-	// db.RemoveDb(ctx, cl)
+
 	db.Init(cl)
 
 	plan_db.Init(cl)
@@ -1523,10 +1522,6 @@ func TestUpdateUserPlan(t *testing.T) {
 	}
 	json.Unmarshal(body, &r)
 
-	// if r.Data.UserPlan == nil {
-	// 	t.Error("Object does not matched")
-	// 	return
-	// }
 }
 
 func TestGetPlanItemsCountByCategory(t *testing.T) {

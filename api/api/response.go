@@ -838,11 +838,7 @@ func (p *ResponseService) All(req *restful.Request, rsp *restful.Response) {
 func (p *ResponseService) Create(req *restful.Request, rsp *restful.Response) {
 	log.Info("Received Response.Create API request")
 	req_resp := new(resp_proto.CreateRequest)
-	// err := req.ReadEntity(req_resp)
-	// if err != nil {
-	// 	utils.WriteErrorResponse(rsp, err, "go.micro.srv.survey.CreateSurvey", "BindError")
-	// 	return
-	// }
+
 	if err := utils.UnmarshalAny(req, rsp, req_resp); err != nil {
 		utils.WriteErrorResponse(rsp, err, "go.micro.srv.response.Create", "BindError")
 		return

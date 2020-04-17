@@ -130,19 +130,6 @@ func (p TeamService) Register() {
 	restful.Add(ws)
 }
 
-// func fetchUserFromTeam(ctx context.Context, team *team_proto.Team, userClient user.AccountClient) {
-// 	if team == nil {
-// 		return
-// 	}
-// 	resp_user, err := userClient.Read(ctx, &user.ReadRequest{
-// 		Id:    team.User.Id,
-// 		Orgid: team.OrgId,
-// 	})
-// 	if err == nil {
-// 		team.User = resp_user.User
-// 	}
-// }
-
 /**
 * @api {get} /server/teams/all?session={session_id}&offset={offset}&limit={limit} List all teams
 * @apiVersion 0.1.0

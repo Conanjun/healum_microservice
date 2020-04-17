@@ -64,8 +64,7 @@ func initUserHandler() *user_hdlr.UserService {
 }
 
 func initUserDb() {
-	// ctx := common.NewTestContext(context.TODO())
-	// db.RemoveDb(ctx, cl)
+
 	db.Init(cl)
 }
 
@@ -901,7 +900,6 @@ func TestGetSharedResources(t *testing.T) {
 	}
 	json.Unmarshal(body, &r)
 
-	// t.Log(r)
 	if r.Code != http.StatusOK {
 		t.Error("Response is not matched")
 		return

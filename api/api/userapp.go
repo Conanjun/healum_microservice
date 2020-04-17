@@ -3921,11 +3921,7 @@ func (p *UserAppService) CreateUserPlan(req *restful.Request, rsp *restful.Respo
 	log.Info("Received UserApp.CreateUserPlan API request")
 
 	req_userapp := new(userapp_proto.CreateUserPlanRequest)
-	// err := req.ReadEntity(req_userapp)
-	// if err != nil {
-	// 	utils.WriteErrorResponse(rsp, err, "go.micro.srv.userapp.CreateUserPlan", "BindError")
-	// 	return
-	// }
+
 	if err := utils.UnmarshalAny(req, rsp, req_userapp); err != nil {
 		utils.WriteErrorResponse(rsp, err, "go.micro.srv.userapp.CreateUserPlan", "BindError")
 		return

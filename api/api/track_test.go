@@ -27,8 +27,7 @@ func initTrackDb() {
 		client.Broker(nats_broker.NewBroker()),
 		client.RequestTimeout(5*time.Second),
 		client.Retries(5))
-	// ctx := common.NewTestContext(context.TODO())
-	// db.RemoveDb(ctx, cl)
+
 	db.Init(cl)
 }
 

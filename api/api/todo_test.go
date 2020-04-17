@@ -74,9 +74,7 @@ func CreateTodo(todo *todo_proto.Todo, t *testing.T) {
 	if err != nil {
 		t.Errorf("unexpected error in sending req: %v", err)
 	}
-	// if resp.StatusCode == http.StatusInternalServerError {
-	// 	t.Skip("Skipping todo because already created")
-	// }
+
 	time.Sleep(time.Second)
 }
 

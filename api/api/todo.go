@@ -207,11 +207,7 @@ func (p *TodoService) AllTodos(req *restful.Request, rsp *restful.Response) {
 func (p *TodoService) CreateTodo(req *restful.Request, rsp *restful.Response) {
 	log.Info("Received Todo.Create API request")
 	req_todo := new(todo_proto.CreateRequest)
-	// err := req.ReadEntity(req_todo)
-	// if err != nil {
-	// 	utils.WriteErrorResponse(rsp, err, "go.micro.srv.todo.CreateTodo", "BindError")
-	// 	return
-	// }
+
 	if err := utils.UnmarshalAny(req, rsp, req_todo); err != nil {
 		utils.WriteErrorResponse(rsp, err, "go.micro.srv.todo.CreateTodo", "BindError")
 		return

@@ -168,17 +168,6 @@ func (p SurveyService) Register() {
 	restful.Add(ws)
 }
 
-// func fetchUserFromSurvey(ctx context.Context, survey *survey_proto.Survey, userClient user_proto.UserServiceClient) {
-// 	if survey == nil {
-// 		return
-// 	}
-// 	resp_user, err := userClient.Read(ctx, &user_proto.ReadRequest{survey.CreatorId})
-// 	// fmt.Println("resp_user", resp_user)
-// 	if err == nil {
-// 		survey.Creator = resp_user.Data.User
-// 	}
-// }
-
 /**
  * @api {get} /server/surveys/all?session={session_id}&offset={offset}&limit={limit} List all surveys
  * @apiVersion 0.1.0

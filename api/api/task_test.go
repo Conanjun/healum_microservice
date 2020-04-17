@@ -88,9 +88,7 @@ func CreateTask(task *task_proto.Task, t *testing.T) {
 	if err != nil {
 		t.Errorf("unexpected error in sending req: %v", err)
 	}
-	// if resp.StatusCode == http.StatusInternalServerError {
-	// 	t.Skip("Skipping task because already created")
-	// }
+
 	time.Sleep(time.Second)
 }
 
