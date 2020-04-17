@@ -4097,16 +4097,11 @@ func (p *UserAppService) UpdateUserPlan(req *restful.Request, rsp *restful.Respo
 	log.Info("Received UserApp.UpdateUserPlan API request")
 
 	req_userapp := new(userapp_proto.UpdateUserPlanRequest)
-	// err := req.ReadEntity(req_userapp)
-	// if err != nil {
-	// 	utils.WriteErrorResponse(rsp, err, "go.micro.srv.userapp.UpdateUserPlan", "BindError")
-	// 	return
-	// }
+
 	if err := utils.UnmarshalAny(req, rsp, req_userapp); err != nil {
 		utils.WriteErrorResponse(rsp, err, "go.micro.srv.userapp.UpdateUserPlan", "BindError")
 		return
 	}
-	// req_userapp.OrgId = req.Attribute(OrgIdAttrName).(string)
 
 	ctx := common.NewContextByHeader(context.TODO(), req.Request.Header)
 	resp, err := p.UserAppClient.UpdateUserPlan(ctx, req_userapp)

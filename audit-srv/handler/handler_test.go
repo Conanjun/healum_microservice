@@ -21,8 +21,6 @@ var cl = client.NewClient(
 )
 
 func initDb() {
-	// ctx := common.NewTestContext(context.TODO())
-	// db.RemoveDb(ctx, cl)
 	db.Init(cl)
 }
 

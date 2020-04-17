@@ -38,10 +38,7 @@ func NewClientWrapper(serviceClient client.Client) *clientWrapper {
 // Init initializes healum databases
 func Init(serviceClient client.Client) error {
 	ClientWrapper = NewClientWrapper(serviceClient)
-	// if _, err := ClientWrapper.Db_client.Init(context.TODO(), &db_proto.InitRequest{}); err != nil {
-	// 	log.Fatal(err)
-	// 	return err
-	// }
+
 	return nil
 }
 

@@ -26,9 +26,6 @@ func (u SwaggerService) Register() {
 	// no need to access body more than once
 	restful.SetCacheReadEntity(false)
 
-	// API Cross-origin requests
-	// apiCors := props.GetBool("http.server.cors", false)
-
 	addr := u.Config.Get("swagger", "http.server.host").String("localhost") + ":" + u.Config.Get("swagger", "http.server.port").String("8080")
 	basePath := "http://" + addr
 

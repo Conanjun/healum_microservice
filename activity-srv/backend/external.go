@@ -362,7 +362,6 @@ func retreiveGeolocationFromPostcode(postcode string) *content_proto.Geo {
 	}
 	// make request to retrieve geo-location with postcode
 	url := "http://api.postcodes.io/postcodes/" + postcode
-	// log.Error("postcode.io retrieve url:", url)
 
 	// response struct of
 	type postio struct {

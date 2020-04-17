@@ -88,8 +88,6 @@ func FetchDatabase(service *handler.ActivityService) {
 				case <-tickerChan:
 					log.Info("Restarted fetch external api:", k)
 					done <- true
-					// remove old database in the collection
-					// db.DeleteSource(context.Background(), ext.Name)
 				}
 			}
 		}()

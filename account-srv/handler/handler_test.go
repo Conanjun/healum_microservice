@@ -87,8 +87,7 @@ func initUserHandler() *user_hdlr.UserService {
 }
 
 func initHandler() *AccountService {
-	// ctx := common.NewTestContext(context.TODO())
-	// db.RemoveDb(ctx, cl)
+
 	db.Init(cl)
 
 	nats_brker := nats_broker.NewBroker()
@@ -348,20 +347,6 @@ func TestConfirmResendWithPhone(t *testing.T) {
 	ctx := common.NewTestContext(context.TODO())
 	hdlr := initHandler()
 
-	//fix this to create a user and account dynamically
-	// req_create := &account_proto.CreateRequest{account_phone}
-	// rsp_create := &account_proto.CreateResponse{}
-	// err := hdlr.Create(ctx, req_create, rsp_create)
-	// if err != nil {
-	// 	t.Error(err)
-	// 	return
-	// }
-
-	// if len(rsp_create.Token) == 0 {
-	// 	t.Error("Not created with email")
-	// 	return
-	// }
-
 	req_resend := &account_proto.ConfirmResendRequest{Phone: account_phone.Phone}
 	rsp_resend := &account_proto.ConfirmResendResponse{}
 	err := hdlr.ConfirmResend(ctx, req_resend, rsp_resend)
@@ -548,14 +533,6 @@ func TestUpdateLockStatusByLoginWithPhone(t *testing.T) {
 		req_login := &account_proto.LoginRequest{Phone: account_phone.Phone, Passcode: "pass"}
 		rsp_login := &account_proto.LoginResponse{}
 		hdlr.Login(ctx, req_login, rsp_login)
-		// if err != nil {
-		// 	t.Error(err)
-		// }
-
-		// // t.Error(rsp_login.Data)
-		// if rsp_login.Data.Session == nil {
-		// 	t.Error("Session does not matched")
-		// }
 
 		time.Sleep(time.Second)
 	}
@@ -916,4 +893,3 @@ func TestGetAccountStatus(t *testing.T) {
 		return
 	}
 }
-

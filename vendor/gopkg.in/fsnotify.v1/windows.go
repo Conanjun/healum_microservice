@@ -501,7 +501,6 @@ func (w *Watcher) readEvents() {
 			}
 			offset += raw.NextEntryOffset
 
-			// Error!
 			if offset >= n {
 				w.Errors <- errors.New("Windows system assumed buffer larger than it is, events have likely been missed.")
 				break

@@ -68,7 +68,7 @@ func main() {
 		micro.Metadata(map[string]string{"Description": descr}),
 		micro.RegisterTTL(time.Minute),
 		micro.RegisterInterval(time.Second*10),
-		// micro.Client(cl),
+
 		micro.Flags(
 			cli.BoolFlag{
 				Name: "debug",
