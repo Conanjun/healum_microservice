@@ -107,8 +107,6 @@ func initDb() {
 }
 
 func TestInitDb(t *testing.T) {
-	// ctx := common.NewTestContext(context.TODO())
-	// db.RemoveDb(ctx, cl)
 
 	if err := db.Init(cl); err != nil {
 		t.Error(err)

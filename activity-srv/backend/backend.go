@@ -31,7 +31,7 @@ func Init() {
 
 // QueryExternalAPI queries to external api
 func QueryExternalAPI(service *handler.ActivityService, ext *ExtBackend, k string, done chan bool) {
-	// go func() {
+
 	// getting database from backend till finish fetching
 	for {
 		datas, err := ext.Query(k)

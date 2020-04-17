@@ -1172,10 +1172,6 @@ func TestCreateWellbeingContent(t *testing.T) {
 		t.Error("Object count does not matched")
 		return
 	}
-	// if resp_all.Data.Contents[0].Category.NameSlug != "wellbeing" {
-	// 	t.Error("Object could not be nil")
-	// 	return
-	// }
 }
 
 func TestCreateContentRecommendation(t *testing.T) {

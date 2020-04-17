@@ -44,12 +44,6 @@ var (
 	PostCodes = make(map[string]*content_proto.Geo)
 )
 
-// type Transform struct {
-// 	Type     string `json:"type"`
-// 	Path     string `json:"path"`
-// 	Variable string `json:"variable"`
-// }
-
 type ExtBackend struct {
 	ID           string                      `json:"id"`
 	Name         string                      `json:"name"`

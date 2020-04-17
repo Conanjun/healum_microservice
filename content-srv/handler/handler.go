@@ -539,7 +539,6 @@ func (p *ContentService) CreateAppContent(ctx context.Context, req *content_prot
 		if err != nil {
 			return common.InternalServerError(common.ContentSrv, p.CreateAppContent, err, "create error")
 		}
-		// rsp.Data = &content_proto.ContentData{content}
 	}
 	return nil
 }

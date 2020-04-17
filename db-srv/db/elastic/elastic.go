@@ -3,18 +3,20 @@ package elastic
 import (
 	"encoding/json"
 	"fmt"
+
 	elib "github.com/mattbaird/elastigo/lib"
 
-	"github.com/micro/go-micro/registry"
+	"errors"
 	"math"
 	"server/common"
 	"server/db-srv/db"
 	mdb "server/db-srv/proto/db"
+	"strconv"
+	"strings"
 	"sync"
 	"time"
-	"strings"
-	"strconv"
-	"errors"
+
+	"github.com/micro/go-micro/registry"
 )
 
 type elasticsearchDriver struct{}
@@ -102,37 +104,7 @@ func (d *elasticsearchDB) Create(r *mdb.Record) error {
 	}
 	r.Updated = time.Now().Unix()
 	_, err := d.connection.Index(d.elasticIndex, d.elasticType, r.Id, nil, r)
-	//mappingOpts := elib.MappingOptions{
-	//	//Id:        elib.IdOptions{Index: "analyzed", Path: "id"},
-	//	Properties: map[string]interface{}{
-	//		// special properties that can't be expressed as tags
-	//		"parameter21": map[string]interface{}{
-	//			"type": "geo_point",
-	//		},
-	//
-	//		"id": map[string]interface{}{
-	//			"type": "text",
-	//		},
-	//	},
-	//}
-	//////options := `"pin": {
-	//////               "properties": {
-	//////                   "location": {
-	//////                       "type": "geo_point"
-	//////                   }
-	//////               }
-	//////           }`
-	////pin := Pin{}
-	////pin.Id = r.Id
-	//err := d.connection.PutMapping(d.elasticIndex, d.elasticType, mdb.Record{}, mappingOpts)
-	//fmt.Println(err)
-	////_, err = d.connection.Index(d.elasticIndex, d.elasticType, r.Id, nil, r)
-	////fmt.Println(err)
-	////err = d.connection.PutMapping(d.elasticIndex, d.elasticType, *r, mappingOpts)
-	////fmt.Println(err)
-	////_, err = d.connection.Index(d.elasticIndex, d.elasticType, r.Id, nil, pin)
-	//
-	////err = d.connection.PutMapping(d.elasticIndex, d.elasticType, Pin{}, mappingOpts)
+
 	return err
 }
 
@@ -243,7 +215,7 @@ func (d *elasticsearchDB) Search(md map[string]string, from, to, limit, offset i
 			elib.Query().Search(query)).Size(size)
 		out, err := elasticQuery.Result(d.connection)
 		if err != nil {
-			if strings.Contains(err.Error(), "No mapping found"){
+			if strings.Contains(err.Error(), "No mapping found") {
 				return records, nil
 			}
 			return nil, err
@@ -297,10 +269,10 @@ func (d *elasticsearchDB) Search(md map[string]string, from, to, limit, offset i
 					   ]
 					}
 		`, query, fromStr, toStr, sorting)
-		out, err := d.connection.Search(d.elasticIndex, d.elasticType, map[string]interface{} {"from" : offs, "size": size}, qryType)
+		out, err := d.connection.Search(d.elasticIndex, d.elasticType, map[string]interface{}{"from": offs, "size": size}, qryType)
 
 		if err != nil {
-			if strings.Contains(err.Error(), "No mapping found"){
+			if strings.Contains(err.Error(), "No mapping found") {
 				return records, nil
 			}
 			return nil, err
@@ -322,10 +294,10 @@ func (d *elasticsearchDB) RunQuery(query string) ([]*mdb.Record, error) {
 	d.RLock()
 	defer d.RUnlock()
 
-	elasticQuery, err := d.connection.Search(d.elasticIndex, d.elasticIndex, nil, query);
+	elasticQuery, err := d.connection.Search(d.elasticIndex, d.elasticIndex, nil, query)
 	var records []*mdb.Record
 	if err != nil {
-		if strings.Contains(err.Error(), "No mapping found"){
+		if strings.Contains(err.Error(), "No mapping found") {
 			return records, nil
 		}
 		return nil, err
